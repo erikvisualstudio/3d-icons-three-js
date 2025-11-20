@@ -22,7 +22,7 @@ scene.add(ambientLight, dirLight);
 
 // --- Kamera ---
 const camera = new THREE.PerspectiveCamera(
-  50,
+  40,
   window.innerWidth / window.innerHeight,
   0.1,
   100
