@@ -27,7 +27,7 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   100
 );
-camera.position.set(8.5, 0, 17);  // von links & leicht oben
+camera.position.set(9.5, 0, 19);  // von links & leicht oben
 camera.lookAt(0, 0, 0);
 
 scene.add(camera);
@@ -36,7 +36,7 @@ scene.add(camera);
 const textureLoader = new THREE.TextureLoader();
 
 // selbe Datei als einfache "Fake"-EnvMap benutzen
-const envTexture = textureLoader.load('textures/green-red-background.jpg');
+const envTexture = textureLoader.load('textures/blue-light-background.jpg');
 envTexture.mapping = THREE.EquirectangularReflectionMapping;
 envTexture.colorSpace = THREE.SRGBColorSpace;
 
