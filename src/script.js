@@ -27,7 +27,7 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   100
 );
-camera.position.set(3.4, 0, 6.8);  // von links & leicht oben
+camera.position.set(8, 0, 16);  // von links & leicht oben
 camera.lookAt(0, 0, 0);
 
 scene.add(camera);
@@ -36,7 +36,7 @@ scene.add(camera);
 const textureLoader = new THREE.TextureLoader();
 
 // selbe Datei als einfache "Fake"-EnvMap benutzen
-const envTexture = textureLoader.load('textures/yellow-light-background.jpg');
+const envTexture = textureLoader.load('textures/blue-orange-background.jpg');
 envTexture.mapping = THREE.EquirectangularReflectionMapping;
 envTexture.colorSpace = THREE.SRGBColorSpace;
 
@@ -63,7 +63,7 @@ const loader = new GLTFLoader();
 let model = null;
 
 loader.load(
-  '3D/coolesB.glb',
+  '3D/Branding.glb',
   (gltf) => {
     model = gltf.scene;
 
