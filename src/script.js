@@ -27,7 +27,7 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   100
 );
-camera.position.set(9.5, 0, 19);  // von links & leicht oben
+camera.position.set(9, 0, 18);  // von links & leicht oben
 camera.lookAt(0, 0, 0);
 
 scene.add(camera);
