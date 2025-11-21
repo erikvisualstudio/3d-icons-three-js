@@ -36,7 +36,7 @@ scene.add(camera);
 const textureLoader = new THREE.TextureLoader();
 
 // selbe Datei als einfache "Fake"-EnvMap benutzen
-const envTexture = textureLoader.load('textures/blue-light-background.jpg');
+const envTexture = textureLoader.load('textures/yellow-light-background.jpg');
 envTexture.mapping = THREE.EquirectangularReflectionMapping;
 envTexture.colorSpace = THREE.SRGBColorSpace;
 
@@ -63,7 +63,7 @@ const loader = new GLTFLoader();
 let model = null;
 
 loader.load(
-  '3D/webflow.glb',
+  '3D/figma.glb',
   (gltf) => {
     model = gltf.scene;
 
