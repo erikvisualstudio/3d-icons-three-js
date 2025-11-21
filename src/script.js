@@ -140,6 +140,15 @@ controls.enableDamping = true;
 controls.target.set(0, 0, 0);
 controls.update();
 
+// Nur drehen erlauben:
+controls.enableZoom = false; // kein Scroll-Zoom, kein Pinch
+controls.enablePan  = false; // kein Verschieben mit rechter Maustaste
+
+// optional: auch keine Rotation mit rechter Maustaste erzwingen
+controls.mouseButtons.RIGHT = null;
+controls.mouseButtons.MIDDLE = null;
+
+
 // --- Resize ---
 window.addEventListener('resize', () => {
   camera.aspect = window.innerWidth / window.innerHeight;
