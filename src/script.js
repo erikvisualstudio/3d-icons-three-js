@@ -1,10 +1,10 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { Pane } from 'tweakpane';
+// import { Pane } from 'tweakpane';
 
-// --- Pane (GUI) ---
-const pane = new Pane();
+// // --- Pane (GUI) ---
+// const pane = new Pane();
 
 // --- Canvas ---
 const canvas = document.querySelector('canvas.threejs');
@@ -15,26 +15,28 @@ const scene = new THREE.Scene();
 // --- Licht ---
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
 const dirLight = new THREE.DirectionalLight(0xffffff, 3);
-dirLight.position.set(-6, 2, 2); // leicht von oben/vorne
+dirLight.position.set(-3, 2, 2); // leicht von oben/vorne
 dirLight.castShadow = true;
 
 scene.add(ambientLight, dirLight);
 
 // --- Kamera ---
 const camera = new THREE.PerspectiveCamera(
-  50,
+  40,
   window.innerWidth / window.innerHeight,
   0.1,
-  1000
+  100
 );
-camera.position.set(0, 0, 16);
+camera.position.set(6.1, 0, 12.2);  // von links & leicht oben
+camera.lookAt(0, 0, 0);
+
 scene.add(camera);
 
 // --- Textur / EnvMap ---
 const textureLoader = new THREE.TextureLoader();
 
 // selbe Datei als einfache "Fake"-EnvMap benutzen
-const envTexture = textureLoader.load('/textures/blue-light-background.jpg');
+const envTexture = textureLoader.load('textures/blue-light-background.jpg');
 envTexture.mapping = THREE.EquirectangularReflectionMapping;
 envTexture.colorSpace = THREE.SRGBColorSpace;
 
@@ -48,7 +50,7 @@ scene.environment = envTexture;
 const webflowMaterial = new THREE.MeshPhysicalMaterial({
   color: 0xffffff,
   metalness: 1,
-  roughness: 0.05,
+  roughness: 0.12,
   reflectivity: 1,
   clearcoat: 1,
   clearcoatRoughness: 0.15,
@@ -61,7 +63,7 @@ const loader = new GLTFLoader();
 let model = null;
 
 loader.load(
-  '3D/webflow_grau.glb',
+  '3D/Branding.glb',
   (gltf) => {
     model = gltf.scene;
 
@@ -93,13 +95,13 @@ model.position.set(0, 0, 0);
     scene.add(model);
 
     // --- Pane-Controls ---
-    const folder = pane.addFolder({ title: 'Material' });
+    // const folder = pane.addFolder({ title: 'Material' });
 
-    folder.addBinding(webflowMaterial, 'metalness', { min: 0, max: 1, step: 0.01 });
-    folder.addBinding(webflowMaterial, 'roughness', { min: 0, max: 1, step: 0.01 });
-    folder.addBinding(webflowMaterial, 'clearcoat', { min: 0, max: 1, step: 0.01 });
-    folder.addBinding(webflowMaterial, 'clearcoatRoughness', { min: 0, max: 1, step: 0.01 });
-    folder.addBinding(webflowMaterial, 'envMapIntensity', { min: 0, max: 5, step: 0.1 });
+    // folder.addBinding(webflowMaterial, 'metalness', { min: 0, max: 1, step: 0.01 });
+    // folder.addBinding(webflowMaterial, 'roughness', { min: 0, max: 1, step: 0.01 });
+    // folder.addBinding(webflowMaterial, 'clearcoat', { min: 0, max: 1, step: 0.01 });
+    // folder.addBinding(webflowMaterial, 'clearcoatRoughness', { min: 0, max: 1, step: 0.01 });
+    // folder.addBinding(webflowMaterial, 'envMapIntensity', { min: 0, max: 5, step: 0.1 });
   },
   undefined,
   (error) => {
@@ -136,6 +138,16 @@ renderer.setClearColor(0x000000, 0);
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 controls.target.set(0, 0, 0);
+controls.update();
+
+// Nur drehen erlauben:
+controls.enableZoom = false; // kein Scroll-Zoom, kein Pinch
+controls.enablePan  = false; // kein Verschieben mit rechter Maustaste
+
+// optional: auch keine Rotation mit rechter Maustaste erzwingen
+controls.mouseButtons.RIGHT = null;
+controls.mouseButtons.MIDDLE = null;
+
 
 // --- Resize ---
 window.addEventListener('resize', () => {
