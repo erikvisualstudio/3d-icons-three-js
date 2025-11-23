@@ -1,5 +1,5 @@
 export default {
     root: 'src/',
     publicDir: '../static/',
-    base: './',
+    base: '/3d-icons-three-js/',
 }
